@@ -101,6 +101,7 @@ setInterval(function() {
 		let foundElement = i !== -1
 	    	if (foundElement) {
                 	pathpickerarray.splice(UP,1)
+		pathpickerarray = []
 		}
             }
             if (array[currentcell + XFinish * 2] === 0 && Math.floor((currentcell + XFinish * 2) / XFinish) === Math.floor((currentcell) / XFinish)) {
@@ -110,6 +111,7 @@ setInterval(function() {
 		let foundElement = i !== -1
 	    	if (foundElement) {
                 	pathpickerarray.splice(DOWN,1)
+		pathpickerarray = []
 		}
             }
             if (array[currentcell - 2] === 0 && Math.floor((currentcell - 2) / XFinish) === Math.floor((currentcell) / XFinish)) {
@@ -119,6 +121,7 @@ setInterval(function() {
 		let foundElement = i !== -1
 	    	if (foundElement) {
                 	pathpickerarray.splice(LEFT,1)
+		pathpickerarray = []
 		}
             }
             if (array[currentcell + 2] === 0 && Math.floor((currentcell + 2) / XFinish) === Math.floor((currentcell) / XFinish)) {
@@ -128,6 +131,7 @@ setInterval(function() {
 		let foundElement = i !== -1
 	    	if (foundElement) {
                 	pathpickerarray.splice(RIGHT,1)
+		pathpickerarray = []
 		}
             }
             if (stop === 0) {
