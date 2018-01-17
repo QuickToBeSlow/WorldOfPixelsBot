@@ -45,6 +45,7 @@ Xstart = 0, Ystart = 0, TileFloorColor = [0,255,0], TileWallColor = [0,0,0], Til
  *
  *	@returns: True if it succesfully removed something, false otherwise
  */
+
 function removeElementFromArray(arr, el) {
 	let i = arr.indexOf(el)
 	let foundElement = i !== -1
@@ -97,42 +98,22 @@ setInterval(function() {
             if (array[currentcell - XFinish * 2] === 0 && Math.floor((currentcell - XFinish * 2) / XFinish) === Math.floor((currentcell) / XFinish)) {
                 pathpickerarray.push(UP)
             } else if (array[currentcell - XFinish * 2] > 0) {
-	    	let i = pathpickerarray.indexOf(UP)
-		let foundElement = i !== -1
-	    	if (foundElement) {
-                	pathpickerarray.splice(UP,1)
-		pathpickerarray = []
-		}
+		removeElementFromArray(pathpickerarray,UP)
             }
             if (array[currentcell + XFinish * 2] === 0 && Math.floor((currentcell + XFinish * 2) / XFinish) === Math.floor((currentcell) / XFinish)) {
                 pathpickerarray.push(DOWN)
             } else if (array[currentcell + XFinish * 2] > 0) {
-	    	let i = pathpickerarray.indexOf(DOWN)
-		let foundElement = i !== -1
-	    	if (foundElement) {
-                	pathpickerarray.splice(DOWN,1)
-		pathpickerarray = []
-		}
+	    	removeElementFromArray(pathpickerarray,DOWN)
             }
             if (array[currentcell - 2] === 0 && Math.floor((currentcell - 2) / XFinish) === Math.floor((currentcell) / XFinish)) {
                 pathpickerarray.push(LEFT)
             } else if (array[currentcell - 2] > 0) {
-	    	let i = pathpickerarray.indexOf(LEFT)
-		let foundElement = i !== -1
-	    	if (foundElement) {
-                	pathpickerarray.splice(LEFT,1)
-		pathpickerarray = []
-		}
+	    	removeElementFromArray(pathpickerarray,LEFT)
             }
             if (array[currentcell + 2] === 0 && Math.floor((currentcell + 2) / XFinish) === Math.floor((currentcell) / XFinish)) {
                 pathpickerarray.push(RIGHT)
             } else if (array[currentcell + 2] > 0) {
-	    	let i = pathpickerarray.indexOf(RIGHT)
-		let foundElement = i !== -1
-	    	if (foundElement) {
-                	pathpickerarray.splice(RIGHT,1)
-		pathpickerarray = []
-		}
+	    	removeElementFromArray(pathpickerarray,RIGHT)
             }
             if (stop === 0) {
                 arraypicker = pathpickerarray[Math.round(Math.random() * pathpickerarray.length)]
