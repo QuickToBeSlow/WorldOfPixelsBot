@@ -52,13 +52,13 @@ class PixelWand {
 		this._validateDimensions(width, height)
 		// Draw the top and bottom sides of the rectangle, starting left to right
 		for (let i = 0; i < width; i++) {
-			WorldOfPixels.world.setPixel(this.x + i, this.y, color)
-			WorldOfPixels.world.setPixel(this.x + i, this.y + height, this.color)
+			WorldOfPixels.world.setPixel(this.x + i, this.y, this.color)
+			WorldOfPixels.world.setPixel(this.x + i, this.y + height - 1, this.color)
 		}
 		// Draw the left and right sides of the rectangle, starting top to bottom
 		for (let i = 1; i < height - 1; i++) {
-			WorldOfPixels.world.setPixel(this.x, this.y + i, color)
-			WorldOfPixels.world.setPixel(this.x + width, this.y + i, this.color)
+			WorldOfPixels.world.setPixel(this.x, this.y + i, this.color)
+			WorldOfPixels.world.setPixel(this.x + width - 1, this.y + i, this.color)
 		}
 	}
 
