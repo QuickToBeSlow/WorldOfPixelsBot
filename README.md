@@ -38,6 +38,21 @@ Maze Generator (WIP):
 
 Xstart = 0, Ystart = 0, TileFloorColor = [0,255,0], TileWallColor = [0,0,0], TileColor = TileFloorColor, XFinish = 17, YFinish = 17, Speed = 1, XDistance = 0, YDistance = 0, array = [], arrayitem = 0, currentcell = XFinish + 1, stop = 0, arraypicker = 0, pathpickerarray = [], UP = 1, DOWN = 2, LEFT = 3, RIGHT = 4
 
+/** Removes the first instance of a given element from the array.
+ *
+ *	@arr: the array to remove elements from
+ *	@el: the element to look for and remove
+ *
+ *	@returns: True if it succesfully removed something, false otherwise
+ */
+function removeElementFromArray(arr, el) {
+	let i = arr.indexOf(el)
+	let foundElement = i !== -1
+	if (foundElement)
+		arr.splice(i, 1)
+	return foundElement
+}
+
 setInterval(function() {
     if (stop === 0) {
         if (XFinish < 5) {
