@@ -62,6 +62,16 @@ class PixelWand {
 		}
 	}
 
+	/** Draws a 2D grid of colors onto the canvas.
+	 *
+	 * @grid: an array of arrays, each full of length three arrays representing RGB
+	 */
+	drawGrid(grid) {
+		for (let i = 0; i < grid.length; i++)
+			for (let j = 0; j < grid.length; j++)
+				WorldOfPixels.world.setPixel(j, i, grid[i][j])
+	}
+
 	/** A function for drawing a filled rectangle
 	 *
 	 * @width, @height: dimensions of the rectangle
