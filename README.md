@@ -93,13 +93,13 @@ setInterval(function() {
             } else if (arrayitem >= array.length) {
                 arrayitem = 0;
             }
-            if (array[currentcell - XFinish * 2] === 0 && Math.floor((currentcell - XFinish * 2) / XFinish) === Math.floor((currentcell) / XFinish)) {
+            if (array[currentcell - XFinish * 2] === 0) {
                 removeElementFromArray(pathpickerarray,UP);
                 pathpickerarray.push(UP);
             } else if (array[currentcell - XFinish * 2] > 0) {
                 removeElementFromArray(pathpickerarray,UP);
             }
-            if (array[currentcell + XFinish * 2] === 0 && Math.floor((currentcell + XFinish * 2) / XFinish) === Math.floor((currentcell) / XFinish)) {
+            if (array[currentcell + XFinish * 2] === 0) {
                 removeElementFromArray(pathpickerarray,DOWN);
                 pathpickerarray.push(DOWN);
             } else if (array[currentcell + XFinish * 2] > 0) {
@@ -144,3 +144,4 @@ setInterval(function() {
         }
     }
 }, Speed);
+
