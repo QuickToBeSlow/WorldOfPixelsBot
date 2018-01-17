@@ -96,25 +96,25 @@ setInterval(function() {
             if (array[currentcell - XFinish * 2] === 0) {
                 removeElementFromArray(pathpickerarray,UP);
                 pathpickerarray.push(UP);
-            } else if (array[currentcell - XFinish * 2] > 0) {
+            } else {
                 removeElementFromArray(pathpickerarray,UP);
             }
             if (array[currentcell + XFinish * 2] === 0) {
                 removeElementFromArray(pathpickerarray,DOWN);
                 pathpickerarray.push(DOWN);
-            } else if (array[currentcell + XFinish * 2] > 0) {
+            } else {
                 removeElementFromArray(pathpickerarray,DOWN);
             }
             if (array[currentcell - 2] === 0 && Math.floor((currentcell - 2) / XFinish) === Math.floor((currentcell) / XFinish)) {
                 removeElementFromArray(pathpickerarray,LEFT);
                 pathpickerarray.push(LEFT);
-            } else if (array[currentcell - 2] > 0) {
+            } else {
                 removeElementFromArray(pathpickerarray,LEFT);
             }
             if (array[currentcell + 2] === 0 && Math.floor((currentcell + 2) / XFinish) === Math.floor((currentcell) / XFinish)) {
                 removeElementFromArray(pathpickerarray,RIGHT);
                 pathpickerarray.push(RIGHT);
-            } else if (array[currentcell + 2] > 0) {
+            } else {
                 removeElementFromArray(pathpickerarray,RIGHT);
             }
             if (stop === 0) {
@@ -144,4 +144,3 @@ setInterval(function() {
         }
     }
 }, Speed);
-
