@@ -1,7 +1,7 @@
 'use strict'
 
 /**
- * pixel-wand.js
+ * OWOP.js
  * highwind
  *
  * Defines a class that can be imported and used as a tool for the game
