@@ -69,7 +69,7 @@ class PixelWand {
 	draw2DArray(grid) {
 		for (let i = 0; i < grid.length; i++)
 			for (let j = 0; j < grid.length; j++)
-				WorldOfPixels.world.setPixel(j, i, grid[i][j])
+				WorldOfPixels.world.setPixel(this.x + j, this.y + i, grid[i][j])
 	}
 
 	/** Renders a grid object onto the canvas
@@ -79,7 +79,7 @@ class PixelWand {
 	drawGrid(grid) {
 		for (let i = 0; i < grid.width; i++)
 			for (let j = 0; j < grid.height; j++)
-				WorldOfPixels.world.setPixel(i, j, grid.getColor(i, j))
+				WorldOfPixels.world.setPixel(this.x + i, this.y + j, grid.getColor(i, j))
 	}
 
 	/** A function for drawing a filled rectangle
