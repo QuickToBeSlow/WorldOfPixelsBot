@@ -44,7 +44,7 @@ Maze Generator (WIP):
  *	@returns: True if it succesfully removed something, false otherwise
  */
 
-var Xstart = 0, Ystart = 0, TileFloorColor = [0,255,0], TileWallColor = [0,0,0], TileColor = TileFloorColor, XFinish = 17, YFinish = 17, Speed = 1, XDistance = 0, YDistance = 0, array = [], arrayitem = 0, currentcell = XFinish + 1, stop = 0, arraypicker = 0, pathpickerarray = [], UP = 1, DOWN = 2, LEFT = 3, RIGHT = 4;
+var Xstart = 0, Ystart = 0, TileFloorColor = [0,255,0], TileWallColor = [0,0,0], TileColor = TileFloorColor, XFinish = 17, YFinish = 17, Speed = 1, XDistance = 0, YDistance = 0, array = [], arrayitem = 0, currentcell = XFinish + 1, stop = 0, arraypicker = 0, pathpickerarray = [], UP = 1, DOWN = 2, LEFT = 3, RIGHT = 4, unchangingcell = 0, possibilitycount = 0;
 function removeElementFromArray(arr, el) {
     let i = arr.indexOf(el);
     let foundElement = i !== -1;
@@ -117,56 +117,84 @@ setInterval(function() {
             } else {
                 removeElementFromArray(pathpickerarray,RIGHT);
             }
+            unchangingcell = 0;
             if (pathpickerarray.length === 0) {
+                possibilitycount = 0;
                 if (array[currentcell - XFinish] === 1 && array[currentcell - XFinish * 2] === 1) {
                     removeElementFromArray(pathpickerarray,UP);
                     pathpickerarray.push(UP);
+                    possibilitycount += 1;
                 } else {
                     removeElementFromArray(pathpickerarray,UP);
                 }
                 if (array[currentcell + XFinish] === 1 && array[currentcell + XFinish * 2] === 1) {
                     removeElementFromArray(pathpickerarray,DOWN);
                     pathpickerarray.push(DOWN);
+                    possibilitycount += 1;
                 } else {
                     removeElementFromArray(pathpickerarray,DOWN);
                 }
                 if (array[currentcell - 1] === 1 && Math.floor((currentcell - 2) / XFinish) === Math.floor((currentcell) / XFinish) && array[currentcell - 2] === 1) {
                     removeElementFromArray(pathpickerarray,LEFT);
                     pathpickerarray.push(LEFT);
+                    possibilitycount += 1;
                 } else {
                     removeElementFromArray(pathpickerarray,LEFT);
                 }
                 if (array[currentcell + 1] === 1 && Math.floor((currentcell + 2) / XFinish) === Math.floor((currentcell) / XFinish) && array[currentcell + 2] === 1) {
                     removeElementFromArray(pathpickerarray,RIGHT);
                     pathpickerarray.push(RIGHT);
+                    possibilitycount += 1;
                 } else {
                     removeElementFromArray(pathpickerarray,RIGHT);
                 }
+                unchangingcell = 1;
             }
             if (stop === 0) {
                 arraypicker = pathpickerarray[Math.round(Math.random() * pathpickerarray.length)];
             }
-            if (arraypicker === 1) {
-                currentcell += -XFinish;
-                array[currentcell] = 1;
-                currentcell += -XFinish;
-                array[currentcell] = 1;
-            } else if (arraypicker === 2) {
-                currentcell += XFinish;
-                array[currentcell] = 1;
-                currentcell += XFinish;
-                array[currentcell] = 1;
-            } else if (arraypicker === 3) {
-                currentcell += -1;
-                array[currentcell] = 1;
-                currentcell += -1;
-                array[currentcell] = 1;
-            } else if (arraypicker === 4) {
-                currentcell += 1;
-                array[currentcell] = 1;
-                currentcell += 1;
-                array[currentcell] = 1;
+            if (possibilitycount === 1 && unchangingcell === 1) {
+                if (arraypicker === 1) {
+        array[currentcell] = unchangingcell + 1;
+                    currentcell += -XFinish;
+                    currentcell += -XFinish;
+                } else if (arraypicker === 2) {
+                    array[currentcell] = unchangingcell + 1;
+                    currentcell += XFinish;
+                    currentcell += XFinish;
+                } else if (arraypicker === 3) {
+                    array[currentcell] = unchangingcell + 1;
+                    currentcell += -1;
+                    currentcell += -1;
+                } else if (arraypicker === 4) {
+                    array[currentcell] = unchangingcell + 1;
+                    currentcell += 1;
+                    currentcell += 1;
+                }
+            } else {
+                if (arraypicker === 1) {
+                    currentcell += -XFinish;
+                    array[currentcell] = 1;
+                    currentcell += -XFinish;
+                    array[currentcell] = 1;
+                } else if (arraypicker === 2) {
+                    currentcell += XFinish;
+                    array[currentcell] = 1;
+                    currentcell += XFinish;
+                    array[currentcell] = 1;
+                } else if (arraypicker === 3) {
+                    currentcell += -1;
+                    array[currentcell] = 1;
+                    currentcell += -1;
+                    array[currentcell] = 1;
+                } else if (arraypicker === 4) {
+                    currentcell += 1;
+                    array[currentcell] = 1;
+                    currentcell += 1;
+                    array[currentcell] = 1;
+                }
+                }
             }
         }
-    }
-}, Speed);
+    }, Speed);
+    
