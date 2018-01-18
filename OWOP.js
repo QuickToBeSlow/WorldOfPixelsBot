@@ -180,3 +180,59 @@ class Grid {
 			throw "Cannot get the color: index out of bounds"
 	}
 }
+
+/** Inserts a maze into the grid using recursive backtracking
+ *
+ * @grid: a freshly instantiated grid
+ */
+ // TODO: make this a grid method
+function generateMaze(grid) {
+	// Traverses nodes in a depth-first style, visiting each and marking them as
+	// white IF they are not already adjacent to two or more white nodes.
+	function carveTunnels(node) {
+		// mark node as visited
+		node.visited = true
+
+		// Check and see if this is next to more than one white space. If not,
+		// make it another white space.
+		let whiteCount = 0
+		let surroundingNodes = node.unvisited
+		for (let i = 0; i < surroundingNodes.length; i++)
+			if (surroundingNodes[i].color === Colors.white)
+				whiteCount++
+		if (whiteCount < 2) {
+			node.color = Colors.white
+
+			// While there are unvisited nodes next to this one, visit them
+			while (surroundingNodes.length > 0) {
+				let randomIndex = Math.floor(Math.random() * surroundingNodes.length)
+				let randomNode = surroundingNodes[randomIndex]
+				carveTunnels(randomNode)
+				surroundingNodes = node.unvisited
+			}
+		}
+	}
+
+	// Check the size of our grid
+	if (grid.width < 3 || grid.height < 3)
+		throw "Grid must be at least 3x3"
+
+	// Get the start and end pixels and turn them white
+	let entry = grid.getPixel(0, 1)
+	let exit = grid.getPixel(grid.width - 1, grid.height - 2)
+	entry.color = exit.color = Colors.white
+
+	// Mark the edges as visited, so that they don't get dug out
+	for (let i = 0; i < grid.width; i++)
+		grid.getPixel(i, 0).visited = grid.getPixel(i, grid.height - 1).visited = true
+	for (let j = 1; j < grid.height - 1; j++)
+		grid.getPixel(0, j).visited = grid.getPixel(grid.width - 1, j).visited = true
+
+	// Begin carving tunnels, starting at the first block after the entry
+	carveTunnels(entry.right)
+}
+
+// TODO: remove this test script
+debugger
+let g = new Grid(5, 5)
+generateMaze(g)
