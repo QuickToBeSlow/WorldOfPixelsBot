@@ -44,7 +44,7 @@ Maze Generator (WIP):
  *	@returns: True if it succesfully removed something, false otherwise
  */
 
-var Xstart = 0, Ystart = 0, TileFloorColor = [0,255,0], TileWallColor = [0,0,0], TileColor = TileFloorColor, XFinish = 17, YFinish = 17, Speed = 1, XDistance = 0, YDistance = 0, array = [], arrayitem = 0, currentcell = XFinish + 1, stop = 0, arraypicker = 0, pathpickerarray = [], UP = 1, DOWN = 2, LEFT = 3, RIGHT = 4, unchangingcell = 0, possibilitycount = 0;
+var Xstart = 0, Ystart = 0, TileFloorColor = [0,255,0], TileWallColor = [0,0,0], TileColor = TileFloorColor, XFinish = 17, YFinish = 17, Speed = 1, XDistance = 0, YDistance = 0, array = [], arrayitem = 0, currentcell = XFinish + 1, stop = 0, arraypicker = 0, pathpickerarray = [], UP = 1, DOWN = 2, LEFT = 3, RIGHT = 4, unchangingcell = 0, possibilitycount = 0, lastchoice = 0;
 function removeElementFromArray(arr, el) {
     let i = arr.indexOf(el);
     let foundElement = i !== -1;
@@ -152,10 +152,16 @@ setInterval(function() {
             }
             if (stop === 0) {
                 arraypicker = pathpickerarray[Math.round(Math.random() * pathpickerarray.length)];
+                lastchoice = arraypicker;
+            }
+            if (unchangingcell === 0 && possibilitycount === 1) {
+                lastchoice = 0;
+            } else {
+                removeElementFromArray(pathpickerarray,lastchoice);
             }
             if (possibilitycount === 1 && unchangingcell === 1) {
                 if (arraypicker === 1) {
-        array[currentcell] = unchangingcell + 1;
+                    array[currentcell] = unchangingcell + 1;
                     currentcell += -XFinish;
                     currentcell += -XFinish;
                 } else if (arraypicker === 2) {
@@ -193,8 +199,8 @@ setInterval(function() {
                     currentcell += 1;
                     array[currentcell] = 1;
                 }
-                }
             }
         }
-    }, Speed);
-    
+    }
+    lastchoice = 0;
+}, Speed);
