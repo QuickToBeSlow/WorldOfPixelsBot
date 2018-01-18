@@ -68,7 +68,7 @@ setInterval(function() {
         }
         if (array[arrayitem] === 0) {
             TileColor = TileWallColor;
-        } else if (array[arrayitem] === 1) {
+        } else if (array[arrayitem] > 0) {
             TileColor = TileFloorColor;
         }
         if (array.length >= XFinish * YFinish - 1) {
@@ -116,6 +116,32 @@ setInterval(function() {
                 pathpickerarray.push(RIGHT);
             } else {
                 removeElementFromArray(pathpickerarray,RIGHT);
+            }
+            if (pathpickerarray.length === 0) {
+                if (array[currentcell - XFinish] === 1) {
+                    removeElementFromArray(pathpickerarray,UP);
+                    pathpickerarray.push(UP);
+                } else {
+                    removeElementFromArray(pathpickerarray,UP);
+                }
+                if (array[currentcell + XFinish] === 1) {
+                    removeElementFromArray(pathpickerarray,DOWN);
+                    pathpickerarray.push(DOWN);
+                } else {
+                    removeElementFromArray(pathpickerarray,DOWN);
+                }
+                if (array[currentcell - 1] === 1 && Math.floor((currentcell - 2) / XFinish) === Math.floor((currentcell) / XFinish)) {
+                    removeElementFromArray(pathpickerarray,LEFT);
+                    pathpickerarray.push(LEFT);
+                } else {
+                    removeElementFromArray(pathpickerarray,LEFT);
+                }
+                if (array[currentcell + 1] === 1 && Math.floor((currentcell + 2) / XFinish) === Math.floor((currentcell) / XFinish)) {
+                    removeElementFromArray(pathpickerarray,RIGHT);
+                    pathpickerarray.push(RIGHT);
+                } else {
+                    removeElementFromArray(pathpickerarray,RIGHT);
+                }
             }
             if (stop === 0) {
                 arraypicker = pathpickerarray[Math.round(Math.random() * pathpickerarray.length)];
