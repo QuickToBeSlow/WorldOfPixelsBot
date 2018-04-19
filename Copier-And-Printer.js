@@ -6,6 +6,7 @@ function checkKey(e) {
   e = e || window.event;
   if (e.keyCode === 77) {Mode++;}
   if (Mode === 2) {Mode = 0;}
+  if (e.keyCode === 67) {console.log(array);}
 
 
 }
